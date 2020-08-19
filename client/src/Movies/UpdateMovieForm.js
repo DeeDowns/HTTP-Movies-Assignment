@@ -9,7 +9,7 @@ const initialInputValues = {
     stars: []
 }
 
-const MovieForm = (props) => {
+const UpdateMovieForm = (props) => {
     console.log(props)
     const { id } = useParams()
     const history = useHistory()
@@ -38,16 +38,16 @@ const MovieForm = (props) => {
         axios.put(`http://localhost:5000/api/movies/${id}`, inputValues)
         .then(res => {
             console.log(res)
-            // props.setMovieList([...props.movieList, res.data])
-            const newMovieArr = props.movieList.map(movie => {
-                if(movie.id === props.movieList.id) {
-                    return console.log(movie)
-                } else {
-                    return props.movieList
-                }
-            })
-            props.setMovieList(newMovieArr)
-            history.push(`/movies/${id}`)
+            
+            // const newMovieArr = props.movieList.map(movie => {
+            //     if(movie.id === props.movieList.id) {
+            //         return console.log(movie)
+            //     } else {
+            //         return props.movieList
+            //     }
+            // })
+            // props.setMovieList(newMovieArr)
+            history.push('/')
         })
         .catch(err => {
             console.log(err)
@@ -97,4 +97,4 @@ const MovieForm = (props) => {
     )
 }
 
-export default MovieForm
+export default UpdateMovieForm

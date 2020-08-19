@@ -28,13 +28,14 @@ function Movie({ addToSavedList }) {
     axios.delete(`http://localhost:5000/api/movies/${movie.id}`)
     .then(res => {
       console.log(res)
-      movie.filter(movieItem => {
-        if(movieItem.id === movie.data) {
-          return setMovie([...movie, !movieItem])
-        } else {
-          return movieItem
-        }
-      })
+      // movie.filter(movieItem => {
+      //   if(movieItem.id === movie.data) {
+      //     return setMovie([...movie, !movieItem])
+      //   } else {
+      //     return movieItem
+      //   }
+      // })
+      history.push('/')
     })
     .catch(err => {
       console.log(err)
