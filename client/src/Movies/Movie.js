@@ -23,6 +23,25 @@ function Movie({ addToSavedList }) {
     fetchMovie(params.id);
   }, [params.id]);
 
+  const handleDelete = event => {
+    event.preventDefault()
+    axios.delete(`http://localhost:5000/api/movies/${movie.id}`)
+    .then(res => {
+      console.log(res)
+      movie.filter(movieItem => {
+        if(movieItem.id === movie.data) {
+          return setMovie([...movie, !movieItem])
+        } else {
+          return movieItem
+        }
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+  }
+
   if (!movie) {
     return <div>Loading movie information...</div>;
   }
@@ -35,6 +54,7 @@ function Movie({ addToSavedList }) {
         Save
       </div>
       <button onClick={() => history.push(`/update-movie/${movie.id}`)}>Edit Movie</button>
+      <button onClick={handleDelete}>Remove Movie</button>
     </div>
   );
 }

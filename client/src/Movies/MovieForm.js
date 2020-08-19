@@ -6,7 +6,7 @@ const initialInputValues = {
     title: '',
     director: '',
     metascore: '',
-    // stars: []
+    stars: []
 }
 
 const MovieForm = (props) => {
@@ -19,7 +19,7 @@ const MovieForm = (props) => {
         axios.get(`http://localhost:5000/api/movies/${id}`)
         .then(res => {
             console.log(res)
-            props.setMovieList(res.data)
+            setInputValues(res.data)
         })
         .catch(err => {
             console.log(err)
@@ -35,9 +35,19 @@ const MovieForm = (props) => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        axios.put(`http://localhost:5000/api/movies/${id}`, /*something*/)
+        axios.put(`http://localhost:5000/api/movies/${id}`, inputValues)
         .then(res => {
             console.log(res)
+            // props.setMovieList([...props.movieList, res.data])
+            const newMovieArr = props.movieList.map(movie => {
+                if(movie.id === props.movieList.id) {
+                    return console.log(movie)
+                } else {
+                    return props.movieList
+                }
+            })
+            props.setMovieList(newMovieArr)
+            history.push(`/movies/${id}`)
         })
         .catch(err => {
             console.log(err)
@@ -52,7 +62,7 @@ const MovieForm = (props) => {
                 name='title'
                 id='title'
                 onChange={handleChange}
-                value={props.movieList.title}
+                value={inputValues.title}
            />
 
             <label htmlFor='director'>Director</label>
@@ -61,7 +71,7 @@ const MovieForm = (props) => {
                 name='director'
                 id='director'
                 onChange={handleChange}
-                value={props.movieList.director}
+                value={inputValues.director}
            />
 
             <label htmlFor='metascore'>Metascore</label>
@@ -70,7 +80,7 @@ const MovieForm = (props) => {
                 name='metascore'
                 id='metascore'
                 onChange={handleChange}
-                value={props.movieList.metascore}
+                value={inputValues.metascore}
            />
 
             {/* <label htmlFor='stars'>Movie stars</label>
