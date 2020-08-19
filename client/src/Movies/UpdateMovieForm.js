@@ -6,7 +6,6 @@ const initialInputValues = {
     title: '',
     director: '',
     metascore: '',
-    stars: []
 }
 
 const UpdateMovieForm = (props) => {
@@ -39,14 +38,14 @@ const UpdateMovieForm = (props) => {
         .then(res => {
             console.log(res)
             
-            // const newMovieArr = props.movieList.map(movie => {
-            //     if(movie.id === props.movieList.id) {
-            //         return console.log(movie)
-            //     } else {
-            //         return props.movieList
-            //     }
-            // })
-            // props.setMovieList(newMovieArr)
+            const newMovieArr = props.movieList.map(movie => {
+                if(movie.id === res.data.id) {
+                    return res.data
+                } else {
+                    return movie
+                }
+            })
+            props.setMovieList(newMovieArr)
             history.push('/')
         })
         .catch(err => {

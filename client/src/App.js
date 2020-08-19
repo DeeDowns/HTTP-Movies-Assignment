@@ -23,7 +23,9 @@ const App = () => {
   };
 
   //why
-  getMovieList()
+  // getMovieList()
+
+  
   useEffect(() => {
     getMovieList();
   }, []);
