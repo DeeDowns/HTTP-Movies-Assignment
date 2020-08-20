@@ -25,7 +25,7 @@ const App = () => {
   //why
   // getMovieList()
 
-  
+
   useEffect(() => {
     getMovieList();
   }, []);
@@ -39,7 +39,7 @@ const App = () => {
       </Route>
 
       <Route path="/movies/:id">
-        <Movie addToSavedList={addToSavedList} />
+        <Movie addToSavedList={addToSavedList} movieList={movieList} setMovieList={setMovieList}/>
       </Route>
 
       <Route path='/update-movie/:id'>
