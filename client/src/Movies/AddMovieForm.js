@@ -10,9 +10,9 @@ const initialInputValues = {
 }
 
 const AddMovieForm = (props) => {
-    
     const history = useHistory()
     const [inputValues , setInputValues] = useState(initialInputValues)
+    const [actors, setActors] = useState('')
 
     const addMovie = event => {
         event.preventDefault()
@@ -26,18 +26,25 @@ const AddMovieForm = (props) => {
         .catch(err => {
             console.log(err)
         })
-    
     }
-
 
       const handleChange = event => {
         setInputValues({
             ...inputValues,
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
+           
         })
     }
-   
 
+    const handleActor = event => {
+        event.preventDefault()
+        setInputValues({
+            ...inputValues,
+            stars: [...inputValues.stars, actors]
+        })
+        setActors('')
+    }
+   
     return (
        <form onSubmit={addMovie}>
            <label htmlFor='title'>Title</label>
@@ -67,14 +74,15 @@ const AddMovieForm = (props) => {
                 value={inputValues.metascore}
            />
 
-            {/* <label htmlFor='stars'>Movie stars</label>
-            <input 
+            <label htmlFor='stars'>Actors</label>
+            <textarea 
                 type='text'
                 name='stars'
                 id='stars'
-                // onChange={}
-                value={props.movieList.stars}
-           /> */}
+                onChange={(e) => setActors(e.target.value)}
+                value={actors}
+           />
+           <button onClick={handleActor}>Add Actors</button>
            <button>Add Movie</button>
        </form>
     )
