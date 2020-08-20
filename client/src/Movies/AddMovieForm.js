@@ -19,6 +19,7 @@ const AddMovieForm = (props) => {
         axios.post(`http://localhost:5000/api/movies/`, inputValues)
         .then(res => {
             console.log(res)
+            props.setMovieList(res.data)
             history.push('/')
             
         })
